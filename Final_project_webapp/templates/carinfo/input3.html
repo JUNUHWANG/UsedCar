@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h3>차량 정보 입력</h3>
+    <form action="/carinfo/input3" method="post">
+        <input type="hidden" name="id" value="{{c.id}}">
+        <input type="hidden" name="car_num" value="{{c.car_num}}">
+        <input type="hidden" name="car_buy_price" value="{{c.car_buy_price}}">
+        <input type="hidden" name="car_company" value="{{c.car_company}}">
+        <input type="hidden" name="car_name" value="{{c.car_name}}">
+        <input type="hidden" name="car_year" value="{{c.car_year}}">
+        <input type="hidden" name="car_buytime" value="{{c.car_buytime}}">
+        <input type="hidden" name="car_km" value="{{c.car_km}}">
+        <input type="hidden" name="car_fuel" value="{{c.car_fuel}}">
+        <input type="hidden" name="car_gear" value="{{c.car_gear}}">
+        <input type="hidden" name="car_size" value="{{c.car_size}}">
+        <input type="hidden" name="car_sellarea" value="{{c.car_sellarea}}">
+        <input type="hidden" name="car_cc" value="{{c.car_cc}}">
+        <input type="hidden" name="car_color" value="{{c.car_color}}">
+
+        <input type="hidden" name="car_tax_count" value="{{c.car_tax_count}}">
+        <input type="hidden" name="car_seize_count" value="{{c.car_seize_count}}">
+        <input type="hidden" name="car_security_count" value="{{c.car_security_count}}">
+        <input type="hidden" name="car_accident_count" value="{{c.car_accident_count}}">
+        <input type="hidden" name="car_flood_count" value="{{c.car_flood_count}}">
+        <input type="hidden" name="car_change_using_count" value="{{c.car_change_using_count}}">
+        <input type="hidden" name="car_change_owner_count" value="{{c.car_change_owner_count}}">
+        <input type="hidden" name="car_broken" value="{{c.car_broken}}">
+
+        썬루프:
+        <input type="radio" name="car_option_sunloop" value=1>있음
+        <input type="radio" name="car_option_sunloop" value=0 checked="checked">없음<br/>
+        알루미늄휠:
+        <input type="radio" name="car_option_wheel" value=1>있음
+        <input type="radio" name="car_option_wheel" value=0 checked="checked">없음<br/>
+        내비게이션:
+        <input type="radio" name="car_option_navi" value=1>있음
+        <input type="radio" name="car_option_navi" value=0 checked="checked">없음<br/>
+        오토라이트:
+        <input type="radio" name="car_option_light" value=1>있음
+        <input type="radio" name="car_option_light" value=0 checked="checked">없음<br/>
+        주차감지센서:
+        <input type="radio" name="car_option_parkingsensor" value=1>있음
+        <input type="radio" name="car_option_parkingsensor" value=0 checked="checked">없음<br/>
+        가죽시트:
+        <input type="radio" name="car_option_leatherseat" value=1>있음
+        <input type="radio" name="car_option_leatherseat" value=0 checked="checked">없음<br/>
+        열선시트:
+        <input type="radio" name="car_option_hotseat" value=1>있음
+        <input type="radio" name="car_option_hotseat" value=0 checked="checked">없음<br/>
+        사이드&커튼에어백:
+        <input type="radio" name="car_option_airbag" value=1>있음
+        <input type="radio" name="car_option_airbag" value=0 checked="checked">없음<br/>
+        하이패스룸밀러:
+        <input type="radio" name="car_option_highpass" value=1>있음
+        <input type="radio" name="car_option_highpass" value=0 checked="checked">없음<br/>
+        레인선서와이퍼:
+        <input type="radio" name="car_option_wiper" value=1>있음
+        <input type="radio" name="car_option_wiper" value=0 checked="checked">없음<br/>
+        스마트키:
+        <input type="radio" name="car_option_smartkey" value=1>있음
+        <input type="radio" name="car_option_smartkey" value=0 checked="checked">없음<br/>
+        전동접이사이드미러:
+        <input type="radio" name="car_option_autoside" value=1>있음
+        <input type="radio" name="car_option_autoside" value=0 checked="checked">없음<br/>
+        통풍시트:
+        <input type="radio" name="car_option_coolseat" value=1>있음
+        <input type="radio" name="car_option_coolseat" value=0 checked="checked">없음<br/>
+        타이어공기압장치(TPMS):
+        <input type="radio" name="car_option_tpms" value=1>있음
+        <input type="radio" name="car_option_tpms" value=0 checked="checked">없음<br/>
+        블루투스:
+        <input type="radio" name="car_option_bluetooth" value=1>있음
+        <input type="radio" name="car_option_bluetooth" value=0 checked="checked">없음<br/>
+        핸들열선:
+        <input type="radio" name="car_option_hothandle" value=1>있음
+        <input type="radio" name="car_option_hothandle" value=0 checked="checked">없음<br/>
+        자동긴급제동(AEB):
+        <input type="radio" name="car_option_aeb" value=1>있음
+        <input type="radio" name="car_option_aeb" value=0 checked="checked">없음<br/>
+        차선이탈경보(LDSW):
+        <input type="radio" name="car_option_ldsw" value=1>있음
+        <input type="radio" name="car_option_ldsw" value=0 checked="checked">없음<br/>
+        크루즈컨트롤:
+        <input type="radio" name="car_option_cruise" value=1>있음
+        <input type="radio" name="car_option_cruise" value=0 checked="checked">없음<br/>
+        전동트렁크:
+        <input type="radio" name="car_option_autotrunk" value=1>있음
+        <input type="radio" name="car_option_autotrunk" value=0 checked="checked">없음<br/>
+        <input type="submit" value="내 차는 얼마?"><br/>
+    </form>
+</body>
+</html>

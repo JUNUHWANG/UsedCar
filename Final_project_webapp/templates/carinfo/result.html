@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>내 차는 얼마?!?!?!?!</title>
+    <script>
+        function main(){
+            location.href='/member/index'
+        }
+    </script>
+</head>
+<body>
+    <h3>내 차는 얼마?!?!?!?!</h3>
+    <form action="/carinfo/result" method="post">
+        <input type="hidden" name="id" value="{{c.id}}">
+        <input type="hidden" name="car_num" value="{{c.car_num}}">
+        <input type="hidden" name="car_sell_price" value="{{c.car_sell_price}}">
+        <input type="hidden" name="car_buy_price" value="{{c.car_buy_price}}">
+        <input type="hidden" name="car_company" value="{{c.car_company}}">
+        <input type="hidden" name="car_name" value="{{c.car_name}}">
+        <input type="hidden" name="car_year" value="{{c.car_year}}">
+        <input type="hidden" name="car_buytime" value="{{c.car_buytime}}">
+        <input type="hidden" name="car_km" value="{{c.car_km}}">
+        <input type="hidden" name="car_fuel" value="{{c.car_fuel}}">
+        <input type="hidden" name="car_gear" value="{{c.car_gear}}">
+        <input type="hidden" name="car_size" value="{{c.car_size}}">
+        <input type="hidden" name="car_sellarea" value="{{c.car_sellarea}}">
+        <input type="hidden" name="car_cc" value="{{c.car_cc}}">
+        <input type="hidden" name="car_color" value="{{c.car_color}}">
+
+        <input type="hidden" name="car_tax_count" value="{{c.car_tax_count}}">
+        <input type="hidden" name="car_seize_count" value="{{c.car_seize_count}}">
+        <input type="hidden" name="car_security_count" value="{{c.car_security_count}}">
+        <input type="hidden" name="car_accident_count" value="{{c.car_accident_count}}">
+        <input type="hidden" name="car_flood_count" value="{{c.car_flood_count}}">
+        <input type="hidden" name="car_change_using_count" value="{{c.car_change_using_count}}">
+        <input type="hidden" name="car_change_owner_count" value="{{c.car_change_owner_count}}">
+        <input type="hidden" name="car_broken" value="{{c.car_broken}}">
+
+        <input type="hidden" name="car_option_sunloop" value="{{c.car_option_sunloop}}">
+        <input type="hidden" name="car_option_wheel" value="{{c.car_option_wheel}}">
+        <input type="hidden" name="car_option_navi" value="{{c.car_option_navi}}">
+        <input type="hidden" name="car_option_light" value="{{c.car_option_light}}">
+        <input type="hidden" name="car_option_parkingsensor" value="{{c.car_option_parkingsensor}}">
+        <input type="hidden" name="car_option_leatherseat" value="{{c.car_option_leatherseat}}">
+        <input type="hidden" name="car_option_hotseat" value="{{c.car_option_hotseat}}">
+        <input type="hidden" name="car_option_airbag" value="{{c.car_option_airbag}}">
+        <input type="hidden" name="car_option_highpass" value="{{c.car_option_highpass}}">
+        <input type="hidden" name="car_option_wiper" value="{{c.car_option_wiper}}">
+        <input type="hidden" name="car_option_smartkey" value="{{c.car_option_smartkey}}">
+        <input type="hidden" name="car_option_autoside" value="{{c.car_option_autoside}}">
+        <input type="hidden" name="car_option_coolseat" value="{{c.car_option_coolseat}}">
+        <input type="hidden" name="car_option_tpms" value="{{c.car_option_tpms}}">
+        <input type="hidden" name="car_option_bluetooth" value="{{c.car_option_bluetooth}}">
+        <input type="hidden" name="car_option_hothandle" value="{{c.car_option_hothandle}}">
+        <input type="hidden" name="car_option_aeb" value="{{c.car_option_aeb}}">
+        <input type="hidden" name="car_option_ldsw" value="{{c.car_option_ldsw}}">
+        <input type="hidden" name="car_option_cruise" value="{{c.car_option_cruise}}">
+        <input type="hidden" name="car_option_autotrunk" value="{{c.car_option_autotrunk}}">
+
+        예상 시세 : {{min}} 만원 ~ {{max}} 만원 <br/>
+        차량 번호 : {{c.car_num}} <br/>
+        제조사 : {{c.car_company}} <br/>
+        차종 : {{c.car_name}} <br/>
+        연식 : {{c.car_year}} <br/>
+        연료 : {{c.car_fuel}} <br/>
+        변속기 : {{c.car_gear}} <br/>
+        주행거리 : {{c.car_km}}km <br/>
+        색상 : {{c.car_color}}색 <br/>
+        판매 예상 지역 : {{c.car_sellarea}} <br/>
+
+        <input type="submit" value="결과 저장"><br/>
+        <input type="button" value="메인 화면으로 돌아가기" onclick="main()">
+    </form>
+
+</body>
+</html>
