@@ -48,7 +48,7 @@ class Carinfo(db.Model):
     # 옵션은 유무로 1,0으로 저장
     # 옵션_썬루프,옵션_알루미늄휠,옵션_내비게이션,옵션_오토라이트,옵션_주차감지센서,옵션_가죽시트,옵션_열선시트,옵션_사이드&커튼에어백,
     # 옵션_하이패스룸밀러,옵션_레인선서와이퍼,옵션_스마트키,옵션_전동접이사이드미러,옵션_통풍시트,옵션_타이어공기압장치(TPMS),옵션_블루투스,
-    # 옵션_핸들열선,옵션_자동긴급제동(AEB),옵션_차선이탈경보(LDSW),옵션_크루즈컨트gi롤,옵션_전동트렁크
+    # 옵션_핸들열선,옵션_자동긴급제동(AEB),옵션_차선이탈경보(LDSW),옵션_크루즈컨트롤,옵션_전동트렁크
     car_option_sunloop = db.Column(db.Integer, nullable=False)
     car_option_wheel = db.Column(db.Integer, nullable=False)
     car_option_navi = db.Column(db.Integer, nullable=False)
