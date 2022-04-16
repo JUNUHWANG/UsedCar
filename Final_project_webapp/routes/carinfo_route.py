@@ -129,7 +129,7 @@ def input3():
 
     # 인코딩 된 칼럼 데이터 별도 csv 파일에 저장하여 불러오기
         
-    data_col = pd.read_csv(currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/encoded_column_name.csv')
+    data_col = pd.read_csv(currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/csv/encoded_column_name.csv')
     data_col.drop(columns=['Unnamed: 0'], inplace=True)
 
     # 칼럼 인덱스 / 리스트 맞춰서
@@ -228,7 +228,7 @@ def input3():
     kor_company_list = ['현대', '기아', '제네시스', '한국GM', '르노삼성', '쌍용']
 
     # 모델 파일경로에서 불러오기
-    filename = currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/'
+    filename = currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/model/'
     if c.car_company in kor_company_list:
         input_data[columns_dict['수입여부_국산']] = 1
         filename += 'RandomForestRegressor_kor_depth19model.sav'

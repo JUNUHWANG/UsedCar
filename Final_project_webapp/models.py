@@ -128,7 +128,7 @@ class CarInfoService:
     # 동일 차종 연식 시세, // 실 데이터를 어떤 기준으로 보고싶어하는가??
     def finddata(self, carinfono:int, filter_list:list):
         currentpath = os.getcwd()
-        data = pd.read_csv( currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/merge_search.csv', encoding='utf8' )
+        data = pd.read_csv( currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/csv/merge_search.csv', encoding='utf8' )
         data.drop(columns=['Unnamed: 0'],inplace=True)
 
         data['연형'] = data['연형'].astype(str).str.zfill(2)
