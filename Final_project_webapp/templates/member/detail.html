@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function del(){
+            location.href='/member/del'
+        }
+    </script>
+</head>
+<body>
+<h3>{{m.id}}님의 정보</h3>
+<form action="/member/edit" method="post">
+pwd:<input type="text" name="pwd" value="{{m.pwd}}"><br/>
+name:{{m.name}}<br/>
+email:{{m.email}}<br/>
+    <input type="submit" value="수정">
+    <input type="button" value="삭제" onclick="del()">
+    </form>
+</body>
+</html>

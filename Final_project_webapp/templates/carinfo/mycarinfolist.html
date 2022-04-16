@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{session.login_id}}님께서 조회하신 차량 시세 목록</title>
+    <script>
+        function main(){
+            location.href='/member/index'
+        }
+        function del(carinfono){
+            location.href='/carinfo/del/' + carinfono
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <h3>{{session.login_id}}님께서 조회하신 차량 시세 목록</h3>
+        <table>
+            <tr>
+                <th>조회번호</th> <th>차량번호</th> <th>제조사</th> <th>차종</th> <th>연형</th> <th>주행거리</th> <th>삭제</th>
+            </tr>
+
+            {% for c in list_carinfo %}
+            <tr>
+                <td><a href="/carinfo/detail/{{c.carinfono}}">{{c.carinfono}}</a></td>
+                <td>{{c.car_num}}</td><td>{{c.car_company}}</td><td>{{c.car_name}}</td>
+                <td>{{c.car_year}}</td><td>{{c.car_km}}km</td>
+                <td><input type="button" value="삭제" onclick="del({{c.carinfono}})"></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        <input type="button" value="메인 화면으로 돌아가기" onclick="main()">
+    </form>
+</body>
+</html>
