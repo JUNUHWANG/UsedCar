@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import ko from 'date-fns/locale/ko';
 import CountUp from 'react-countup';
-import priceintro from './asset/priceintro.svg'
+import priceintro from './asset/priceintro5.png'
 import resultimage from './asset/resultimage.svg'
 
 registerLocale('ko', ko);
