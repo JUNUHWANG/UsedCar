@@ -1,9 +1,13 @@
-from flask import request, render_template, redirect, Blueprint, url_for, session
+import string
+from flask import jsonify, request, render_template, redirect, Blueprint, url_for, session
+from flask_sqlalchemy import SQLAlchemy
 from models import Carinfo, CarInfoService
 import pandas as pd
 import numpy as np
 import sklearn
 from sklearn.ensemble import RandomForestRegressor
+from datetime import date, datetime
+import json
 import pickle
 import os
 
@@ -11,8 +15,8 @@ service = CarInfoService()
 
 bp = Blueprint('carinfo', __name__, url_prefix='/carinfo')
 
+now = datetime.now()
 currentpath = os.getcwd()
-
 
 @bp.route('/input1')
 def input1Form():
@@ -21,23 +25,24 @@ def input1Form():
 @bp.route('/input1', methods=['POST'])
 def input1():
     carinfo = Carinfo(
-        id = request.form['id'],
-        car_buy_price = request.form['car_buy_price'],
-        car_num = request.form['car_num'],
-        car_name = request.form['car_name'],
-        car_company = request.form['car_company'],
-        car_year = request.form['car_year'],
-        car_buytime = request.form['car_buytime'],
-        car_km = request.form['car_km'],
-        car_fuel = request.form['car_fuel'],
-        car_gear = request.form['car_gear'],
-        car_size = request.form['car_size'],
-        car_cc = request.form['car_cc'],
-        car_color = request.form['car_color'],
-        car_sellarea = request.form['car_sellarea']
+        id = params['id'],
+        car_buy_price = params['car_buy_price'],
+        car_num = params['car_num'],
+        car_name = params['car_name'],
+        car_company = params['car_company'],
+        car_year = params['car_year'],
+        car_buytime = params['car_buytime'],
+        car_km = params['car_km'],
+        car_fuel = params['car_fuel'],
+        car_gear = params['car_gear'],
+        car_size = params['car_size'],
+        car_cc = params['car_cc'],
+        car_color = params['car_color'],
+        car_sellarea = params['car_sellarea']
 
     )
-    return render_template('carinfo/input2.html', c=carinfo)
+    return jsonify(carinfo)
+    # return render_template('carinfo/input2.html', c=carinfo)
 
 @bp.route('/input2')
 def input2Form():
@@ -47,31 +52,32 @@ def input2Form():
 @bp.route('/input2', methods=['POST'])
 def input2():
     carinfo = Carinfo(
-        id=request.form['id'],
-        car_buy_price=request.form['car_buy_price'],
-        car_num=request.form['car_num'],
-        car_name=request.form['car_name'],
-        car_company=request.form['car_company'],
-        car_year=request.form['car_year'],
-        car_buytime=request.form['car_buytime'],
-        car_km=request.form['car_km'],
-        car_fuel=request.form['car_fuel'],
-        car_gear=request.form['car_gear'],
-        car_size=request.form['car_size'],
-        car_cc=request.form['car_cc'],
-        car_color=request.form['car_color'],
-        car_sellarea=request.form['car_sellarea'],
+        id=params['id'],
+        car_buy_price=params['car_buy_price'],
+        car_num=params['car_num'],
+        car_name=params['car_name'],
+        car_company=params['car_company'],
+        car_year=params['car_year'],
+        car_buytime=params['car_buytime'],
+        car_km=params['car_km'],
+        car_fuel=params['car_fuel'],
+        car_gear=params['car_gear'],
+        car_size=params['car_size'],
+        car_cc=params['car_cc'],
+        car_color=params['car_color'],
+        car_sellarea=params['car_sellarea'],
 
-        car_tax_count = request.form['car_tax_count'],
-        car_seize_count = request.form['car_seize_count'],
-        car_security_count = request.form['car_security_count'],
-        car_accident_count = request.form['car_accident_count'],
-        car_flood_count = request.form['car_flood_count'],
-        car_change_using_count = request.form['car_change_using_count'],
-        car_change_owner_count = request.form['car_change_owner_count'],
-        car_broken = request.form['car_broken']
+        car_tax_count = params['car_tax_count'],
+        car_seize_count = params['car_seize_count'],
+        car_security_count = params['car_security_count'],
+        car_accident_count = params['car_accident_count'],
+        car_flood_count = params['car_flood_count'],
+        car_change_using_count = params['car_change_using_count'],
+        car_change_owner_count = params['car_change_owner_count'],
+        car_broken = params['car_broken']
         )
-    return render_template('carinfo/input3.html', c=carinfo)
+    return jsonify(carinfo)
+    # return render_template('carinfo/input3.html', c=carinfo)
 
 @bp.route('/input3')
 def input3Form():
@@ -79,57 +85,63 @@ def input3Form():
 
 @bp.route('/input3', methods=['POST'])
 def input3():
+    params = request.get_json()
+    print(params)
+    print(type(request))
+    if request.method == 'POST':
+        print(request.json)
     c = Carinfo(
-        id=request.form['id'],
-        car_buy_price=request.form['car_buy_price'],
-        car_num=request.form['car_num'],
-        car_name=request.form['car_name'],
-        car_company=request.form['car_company'],
-        car_year=request.form['car_year'],
-        car_buytime=request.form['car_buytime'],
-        car_km=request.form['car_km'],
-        car_fuel=request.form['car_fuel'],
-        car_gear=request.form['car_gear'],
-        car_size=request.form['car_size'],
-        car_cc=request.form['car_cc'],
-        car_color=request.form['car_color'],
-        car_sellarea=request.form['car_sellarea'],
+        id=params['id'],
+        car_buy_price=params['car_buy_price'],
+        car_num=params['car_num'],
+        car_name=params['car_name'],
+        car_company=params['car_company'],
+        car_year=params['car_year'],
+        car_buytime=params['car_buytime'],
+        car_km=params['car_km'],
+        car_fuel=params['car_fuel'],
+        car_gear=params['car_gear'],
+        car_size=params['car_size'],
+        car_cc=params['car_cc'],
+        car_color=params['car_color'],
+        car_sellarea=params['car_sellarea'],
 
-        car_tax_count=request.form['car_tax_count'],
-        car_seize_count=request.form['car_seize_count'],
-        car_security_count=request.form['car_security_count'],
-        car_accident_count=request.form['car_accident_count'],
-        car_flood_count=request.form['car_flood_count'],
-        car_change_using_count=request.form['car_change_using_count'],
-        car_change_owner_count=request.form['car_change_owner_count'],
-        car_broken=request.form['car_broken'],
+        car_tax_count=params['car_tax_count'],
+        car_seize_count=params['car_seize_count'],
+        car_security_count=params['car_security_count'],
+        car_accident_count=params['car_accident_count'],
+        car_flood_count=params['car_flood_count'],
+        car_change_using_count=params['car_change_using_count'],
+        car_change_owner_count=params['car_change_owner_count'],
+        car_broken=params['car_broken'],
 
-        car_option_sunloop = request.form['car_option_sunloop'],
-        car_option_wheel = request.form['car_option_wheel'],
-        car_option_navi = request.form['car_option_navi'],
-        car_option_light = request.form['car_option_light'],
-        car_option_parkingsensor = request.form['car_option_parkingsensor'],
-        car_option_leatherseat = request.form['car_option_leatherseat'],
-        car_option_hotseat = request.form['car_option_hotseat'],
-        car_option_airbag = request.form['car_option_airbag'],
-        car_option_highpass = request.form['car_option_highpass'],
-        car_option_wiper = request.form['car_option_wiper'],
-        car_option_smartkey = request.form['car_option_smartkey'],
-        car_option_autoside = request.form['car_option_autoside'],
-        car_option_coolseat = request.form['car_option_coolseat'],
-        car_option_tpms = request.form['car_option_tpms'],
-        car_option_bluetooth = request.form['car_option_bluetooth'],
-        car_option_hothandle = request.form['car_option_hothandle'],
-        car_option_aeb = request.form['car_option_aeb'],
-        car_option_ldsw = request.form['car_option_ldsw'],
-        car_option_cruise = request.form['car_option_cruise'],
-        car_option_autotrunk = request.form['car_option_autotrunk']
+        car_option_sunloop = params['car_option_sunloop'],
+        car_option_wheel = params['car_option_wheel'],
+        car_option_navi = params['car_option_navi'],
+        car_option_light = params['car_option_light'],
+        car_option_parkingsensor = params['car_option_parkingsensor'],
+        car_option_leatherseat = params['car_option_leatherseat'],
+        car_option_hotseat = params['car_option_hotseat'],
+        car_option_airbag = params['car_option_airbag'],
+        car_option_highpass = params['car_option_highpass'],
+        car_option_wiper = params['car_option_wiper'],
+        car_option_smartkey = params['car_option_smartkey'],
+        car_option_autoside = params['car_option_autoside'],
+        car_option_coolseat = params['car_option_coolseat'],
+        car_option_tpms = params['car_option_tpms'],
+        car_option_bluetooth = params['car_option_bluetooth'],
+        car_option_hothandle = params['car_option_hothandle'],
+        car_option_aeb = params['car_option_aeb'],
+        car_option_ldsw = params['car_option_ldsw'],
+        car_option_cruise = params['car_option_cruise'],
+        car_option_autotrunk = params['car_option_autotrunk'],
         )
     ## 분석 코드 실행
 
     # 인코딩 된 칼럼 데이터 별도 csv 파일에 저장하여 불러오기
+    # . : 현재 디렉토리 // .. : 상위 디렉토리
         
-    data_col = pd.read_csv(currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/csv/encoded_column_name.csv')
+    data_col = pd.read_csv('./csv/encoded_column_name.csv')
     data_col.drop(columns=['Unnamed: 0'], inplace=True)
 
     # 칼럼 인덱스 / 리스트 맞춰서
@@ -149,25 +161,26 @@ def input3():
     input_data[columns_dict['출고가']] = int(c.car_buy_price)
 
 
-    # 사용기간 -- 년/월 데이터를 --개월로 변경 // 현재 년도 및 월 코드로 받아올 수 있도록 수정
+    # 사용기간 -- 년/월 데이터를 --개월로 변경
+    # 검색 당시 년/월 기준으로 사용기간 설정
     using_period_list = c.car_buytime.split('-')
-    now_year=2022
-    now_month=3
+    now_year=str(now.year)
+    now_month=str(now.month)
     using_period = 0
 
     for i in using_period_list:
         if len(i) == 4:
-            using_period = 12 * (now_year - int(i))
+            using_period = 12 * (int(now_year) - int(i))
         else:
-            if (now_month - int(i)) < 0:
-                using_period -= (12 + (now_month - int(i)))
+            if (int(now_month) - int(i)) < 0:
+                using_period -= (12 + (int(now_month) - int(i)))
             else:
-                using_period += (now_month - int(i))
+                using_period += (int(now_month) - int(i))
 
     input_data[columns_dict['사용 기간']] = np.log(using_period)
 
     # 뒤에 두자리 숫자만 입력하게
-    input_data[columns_dict['연형_' + str(c.car_year)]] = 1
+    input_data[columns_dict['연형_' + str(c.car_year).zfill(2)]] = 1
     input_data[columns_dict['주행거리']] = np.log(int(c.car_km))
 
     # 셀렉 박스
@@ -228,7 +241,7 @@ def input3():
     kor_company_list = ['현대', '기아', '제네시스', '한국GM', '르노삼성', '쌍용']
 
     # 모델 파일경로에서 불러오기
-    filename = currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/model/'
+    filename = currentpath + '/model/'
     if c.car_company in kor_company_list:
         input_data[columns_dict['수입여부_국산']] = 1
         filename += 'RandomForestRegressor_kor_depth19model.sav'
@@ -248,57 +261,70 @@ def input3():
 
 
     carinfo = Carinfo(
-        id=request.form['id'],
+        id=params['id'],
         car_sell_price=round(float(price_input_data),0),
-        car_buy_price=request.form['car_buy_price'],
-        car_num=request.form['car_num'],
-        car_name=request.form['car_name'],
-        car_company=request.form['car_company'],
-        car_year=request.form['car_year'],
-        car_buytime=request.form['car_buytime'],
-        car_km=int(request.form['car_km']),
-        car_fuel=request.form['car_fuel'],
-        car_gear=request.form['car_gear'],
-        car_size=request.form['car_size'],
-        car_cc=int(request.form['car_cc']),
-        car_color=request.form['car_color'],
+        car_buy_price=params['car_buy_price'],
+        car_num=params['car_num'],
+        car_name=params['car_name'],
+        car_company=params['car_company'],
+        car_year=params['car_year'],
+        car_buytime=params['car_buytime'],
+        car_km=int(params['car_km']),
+        car_fuel=params['car_fuel'],
+        car_gear=params['car_gear'],
+        car_size=params['car_size'],
+        car_cc=int(params['car_cc']),
+        car_color=params['car_color'],
 
-        car_tax_count=int(request.form['car_tax_count']),
-        car_seize_count=int(request.form['car_seize_count']),
-        car_security_count=int(request.form['car_security_count']),
-        car_accident_count=int(request.form['car_accident_count']),
-        car_flood_count=int(request.form['car_flood_count']),
-        car_change_using_count=int(request.form['car_change_using_count']),
-        car_change_owner_count=int(request.form['car_change_owner_count']),
-        car_broken=int(request.form['car_broken']),
-        car_sellarea=request.form['car_sellarea'],
+        car_tax_count=int(params['car_tax_count']),
+        car_seize_count=int(params['car_seize_count']),
+        car_security_count=int(params['car_security_count']),
+        car_accident_count=int(params['car_accident_count']),
+        car_flood_count=int(params['car_flood_count']),
+        car_change_using_count=int(params['car_change_using_count']),
+        car_change_owner_count=int(params['car_change_owner_count']),
+        car_broken=int(params['car_broken']),
+        car_sellarea=params['car_sellarea'],
 
-        car_option_sunloop=int(request.form['car_option_sunloop']),
-        car_option_wheel=int(request.form['car_option_wheel']),
-        car_option_navi=int(request.form['car_option_navi']),
-        car_option_light=int(request.form['car_option_light']),
-        car_option_parkingsensor=int(request.form['car_option_parkingsensor']),
-        car_option_leatherseat=int(request.form['car_option_leatherseat']),
-        car_option_hotseat=int(request.form['car_option_hotseat']),
-        car_option_airbag=int(request.form['car_option_airbag']),
-        car_option_highpass=int(request.form['car_option_highpass']),
-        car_option_wiper=int(request.form['car_option_wiper']),
-        car_option_smartkey=int(request.form['car_option_smartkey']),
-        car_option_autoside=int(request.form['car_option_autoside']),
-        car_option_coolseat=int(request.form['car_option_coolseat']),
-        car_option_tpms=int(request.form['car_option_tpms']),
-        car_option_bluetooth=int(request.form['car_option_bluetooth']),
-        car_option_hothandle=int(request.form['car_option_hothandle']),
-        car_option_aeb=int(request.form['car_option_aeb']),
-        car_option_ldsw=int(request.form['car_option_ldsw']),
-        car_option_cruise=int(request.form['car_option_cruise']),
-        car_option_autotrunk=int(request.form['car_option_autotrunk'])
+        car_option_sunloop=int(params['car_option_sunloop']),
+        car_option_wheel=int(params['car_option_wheel']),
+        car_option_navi=int(params['car_option_navi']),
+        car_option_light=int(params['car_option_light']),
+        car_option_parkingsensor=int(params['car_option_parkingsensor']),
+        car_option_leatherseat=int(params['car_option_leatherseat']),
+        car_option_hotseat=int(params['car_option_hotseat']),
+        car_option_airbag=int(params['car_option_airbag']),
+        car_option_highpass=int(params['car_option_highpass']),
+        car_option_wiper=int(params['car_option_wiper']),
+        car_option_smartkey=int(params['car_option_smartkey']),
+        car_option_autoside=int(params['car_option_autoside']),
+        car_option_coolseat=int(params['car_option_coolseat']),
+        car_option_tpms=int(params['car_option_tpms']),
+        car_option_bluetooth=int(params['car_option_bluetooth']),
+        car_option_hothandle=int(params['car_option_hothandle']),
+        car_option_aeb=int(params['car_option_aeb']),
+        car_option_ldsw=int(params['car_option_ldsw']),
+        car_option_cruise=int(params['car_option_cruise']),
+        car_option_autotrunk=int(params['car_option_autotrunk'])
     )
 
     expect_min_price = int(round(float(price_input_data * 0.95), 0))
     expect_max_price = int(round(float(price_input_data * 1.05), 0))
 
-    return render_template('carinfo/result.html', c=carinfo, min=expect_min_price, max=expect_max_price)
+    res_carinfo = {}
+    for key, value in carinfo.__dict__.items():
+        if isinstance(value, date):
+            res_carinfo[key] = value.strftime('%Y-%m-%d')
+        # sqlalchemy.orm.state.InstanceState 타입 제거 목적
+        elif not((type(value) is int) | (type(value) is str) | (type(value) is float)):
+            continue
+        else:
+            res_carinfo[key] = value
+
+    send_data = {"carinfo":res_carinfo, "min":expect_min_price, "max":expect_max_price}
+    print(send_data)
+    return send_data
+    # return render_template('carinfo/result.html', c=carinfo, min=expect_min_price, max=expect_max_price)
 
 @bp.route('/result')
 def resultForm():
@@ -306,61 +332,96 @@ def resultForm():
 
 @bp.route('/result', methods=['POST'])
 def result():
+    params = request.get_json()
+    print(params)
+    print(type(request))
+    if request.method == 'POST':
+        print(request.json)
+
     carinfo = Carinfo(
-        id=request.form['id'],
-        car_sell_price=int(float(request.form['car_sell_price'])),
-        car_buy_price=int(request.form['car_buy_price']),
-        car_num=request.form['car_num'],
-        car_name=request.form['car_name'],
-        car_company=request.form['car_company'],
-        car_year=request.form['car_year'],
-        car_buytime=request.form['car_buytime'],
-        car_km=int(request.form['car_km']),
-        car_fuel=request.form['car_fuel'],
-        car_gear=request.form['car_gear'],
-        car_size=request.form['car_size'],
-        car_cc=int(request.form['car_cc']),
-        car_color=request.form['car_color'],
+        id=params['id'],
+        car_sell_price=int(float(params['car_sell_price'])),
+        car_buy_price=int(params['car_buy_price']),
+        car_num=params['car_num'],
+        car_name=params['car_name'],
+        car_company=params['car_company'],
+        car_year=params['car_year'],
+        car_buytime=params['car_buytime'],
+        car_km=int(params['car_km']),
+        car_fuel=params['car_fuel'],
+        car_gear=params['car_gear'],
+        car_size=params['car_size'],
+        car_cc=int(params['car_cc']),
+        car_color=params['car_color'],
 
-        car_tax_count=int(request.form['car_tax_count']),
-        car_seize_count=int(request.form['car_seize_count']),
-        car_security_count=int(request.form['car_security_count']),
-        car_accident_count=int(request.form['car_accident_count']),
-        car_flood_count=int(request.form['car_flood_count']),
-        car_change_using_count=int(request.form['car_change_using_count']),
-        car_change_owner_count=int(request.form['car_change_owner_count']),
-        car_broken=int(request.form['car_broken']),
-        car_sellarea=request.form['car_sellarea'],
+        car_tax_count=int(params['car_tax_count']),
+        car_seize_count=int(params['car_seize_count']),
+        car_security_count=int(params['car_security_count']),
+        car_accident_count=int(params['car_accident_count']),
+        car_flood_count=int(params['car_flood_count']),
+        car_change_using_count=int(params['car_change_using_count']),
+        car_change_owner_count=int(params['car_change_owner_count']),
+        car_broken=int(params['car_broken']),
+        car_sellarea=params['car_sellarea'],
 
-        car_option_sunloop=int(request.form['car_option_sunloop']),
-        car_option_wheel=int(request.form['car_option_wheel']),
-        car_option_navi=int(request.form['car_option_navi']),
-        car_option_light=int(request.form['car_option_light']),
-        car_option_parkingsensor=int(request.form['car_option_parkingsensor']),
-        car_option_leatherseat=int(request.form['car_option_leatherseat']),
-        car_option_hotseat=int(request.form['car_option_hotseat']),
-        car_option_airbag=int(request.form['car_option_airbag']),
-        car_option_highpass=int(request.form['car_option_highpass']),
-        car_option_wiper=int(request.form['car_option_wiper']),
-        car_option_smartkey=int(request.form['car_option_smartkey']),
-        car_option_autoside=int(request.form['car_option_autoside']),
-        car_option_coolseat=int(request.form['car_option_coolseat']),
-        car_option_tpms=int(request.form['car_option_tpms']),
-        car_option_bluetooth=int(request.form['car_option_bluetooth']),
-        car_option_hothandle=int(request.form['car_option_hothandle']),
-        car_option_aeb=int(request.form['car_option_aeb']),
-        car_option_ldsw=int(request.form['car_option_ldsw']),
-        car_option_cruise=int(request.form['car_option_cruise']),
-        car_option_autotrunk=int(request.form['car_option_autotrunk'])
+        car_option_sunloop=int(params['car_option_sunloop']),
+        car_option_wheel=int(params['car_option_wheel']),
+        car_option_navi=int(params['car_option_navi']),
+        car_option_light=int(params['car_option_light']),
+        car_option_parkingsensor=int(params['car_option_parkingsensor']),
+        car_option_leatherseat=int(params['car_option_leatherseat']),
+        car_option_hotseat=int(params['car_option_hotseat']),
+        car_option_airbag=int(params['car_option_airbag']),
+        car_option_highpass=int(params['car_option_highpass']),
+        car_option_wiper=int(params['car_option_wiper']),
+        car_option_smartkey=int(params['car_option_smartkey']),
+        car_option_autoside=int(params['car_option_autoside']),
+        car_option_coolseat=int(params['car_option_coolseat']),
+        car_option_tpms=int(params['car_option_tpms']),
+        car_option_bluetooth=int(params['car_option_bluetooth']),
+        car_option_hothandle=int(params['car_option_hothandle']),
+        car_option_aeb=int(params['car_option_aeb']),
+        car_option_ldsw=int(params['car_option_ldsw']),
+        car_option_cruise=int(params['car_option_cruise']),
+        car_option_autotrunk=int(params['car_option_autotrunk']),
+        car_search_date = now.date()
     )
     # 데이터 db 저장
     service.addcarinfo(carinfo)
-    return render_template('index.html')
+    return "저장완료"
+    #return render_template('index.html')
 
-@bp.route('/mycarinfolist')
+@bp.route('/mycarinfolist', methods=['POST'])
 def mycarinfolist():
-    list_carinfo = service.getmycarinfo()
-    return render_template('carinfo/mycarinfolist.html', list_carinfo = list_carinfo)
+
+    params = request.get_json()
+    print( params)
+    id = params["id"]
+    print("id값" , id)
+    list_carinfo = service.getmycarinfo(id)
+    print(list_carinfo)
+    res_list_carinfo = []
+    # cnt = 0
+    # 각 carinfo 별 key 값은 숫자 0부터 시작
+    # ex. {0:{car_num:...}, 1:{car_num:...}} << 이런 데이터 형태
+    for carinfo in list_carinfo:
+        res_carinfo = {}
+        for key, value in carinfo.__dict__.items():
+            if isinstance(value, date):
+                res_carinfo[key] = value.strftime('%Y-%m-%d')
+            # sqlalchemy.orm.state.InstanceState 타입 제거 목적
+            elif not((type(value) is int) | (type(value) is str) | (type(value) is float)):
+                continue
+            else:
+                res_carinfo[key] = value
+        # res_list_carinfo['carinfo' + str(cnt)] = res_carinfo
+        # cnt += 1
+
+        res_list_carinfo.append(res_carinfo)
+    #print("res_list_carinfo")
+    #print(res_list_carinfo)
+
+    return { "carinfo" : res_list_carinfo }
 
 @bp.route('/del/<int:carinfono>')
 def delcarinfo(carinfono):
@@ -369,23 +430,112 @@ def delcarinfo(carinfono):
     # return redirect(url_for('mycarinfolist'))
     return redirect('/carinfo/mycarinfolist')
 
-@bp.route('/detail/<int:carinfono>')
-def detailForm(carinfono):
-    carinfo = service.carinfodetail(carinfono)
-    list_carinfo = []
 
+@bp.route('/detail/')
+def detailForm():
+    params = request.args.get('number', type = str)
+    print( "테스트 " , params)
+    
+
+    carinfo = service.carinfodetail(params)
+    
+    list_res_carinfo = []
+    res_carinfo = {}
+    for key, value in carinfo.__dict__.items():
+
+        
+        if isinstance(value, date):
+            res_carinfo[key] = value.strftime('%Y-%m-%d')
+        # sqlalchemy.orm.state.InstanceState 타입 제거 목적
+        elif not((type(value) is int) | (type(value) is str) | (type(value) is float)):
+            continue
+        else:
+            res_carinfo[key] = value
+        
+    list_res_carinfo.append(res_carinfo)
+            
+    # 초기 결과값 확인 시, 동일 차종, 유사 가격 실제 매물로 보여줌
+    filter_list = ["가격", "차종"]
+    filter_data = service.finddata(carinfo.carinfono, filter_list).tolist()
+    
     expect_min_price = round(float(carinfo.car_sell_price * 0.95), 0)
     expect_max_price = round(float(carinfo.car_sell_price * 1.05), 0)
 
-    return render_template('carinfo/detail.html', c = carinfo, min=expect_min_price, max=expect_max_price, list_carinfo=list_carinfo)
+    send_data = {"carinfo":list_res_carinfo, "min":expect_min_price, "max":expect_max_price, "filter_data":filter_data}
+    print(send_data)
+    return send_data
+
+'''
+@bp.route('/detail/<int:carinfono>')
+def detailForm(carinfono):
+
+    carinfo = service.carinfodetail(carinfono)
+    
+    list_res_carinfo = []
+    res_carinfo = {}
+    for key, value in carinfo.__dict__.items():
+
+        
+        if isinstance(value, date):
+            res_carinfo[key] = value.strftime('%Y-%m-%d')
+        # sqlalchemy.orm.state.InstanceState 타입 제거 목적
+        elif not((type(value) is int) | (type(value) is str) | (type(value) is float)):
+            continue
+        else:
+            res_carinfo[key] = value
+        
+    list_res_carinfo.append(res_carinfo)
+            
+    # 초기 결과값 확인 시, 동일 차종, 유사 가격 실제 매물로 보여줌
+    filter_list = ["가격", "차종"]
+    filter_data = service.finddata(carinfo.carinfono, filter_list).tolist()
+    
+    expect_min_price = round(float(carinfo.car_sell_price * 0.95), 0)
+    expect_max_price = round(float(carinfo.car_sell_price * 1.05), 0)
+
+    send_data = {"carinfo":list_res_carinfo, "min":expect_min_price, "max":expect_max_price, "filter_data":filter_data}
+    print(send_data)
+    return send_data 
+
+'''
+
+
 
 @bp.route('/detail/<int:carinfono>', methods=['POST'])
 def detail(carinfono):
-    filter_list = request.form.getlist('filter')
+    params = request.get_json()
+    #params2 = request.form.getlist('filter{}')
+    #print(params)
+    #params = request.form.get_json("filter", type=list)
+    #print("파람", params)
+    filter_list = params["filter_list"]
+    
+    #print(type(request))
+    if request.method == 'POST':
+        print(request.json)
+    #filter_list = params.getlist('filter[]')
+    #filter_list = request.form.getlist('filter')
+    #print("필터타입", type(filter_list))
+    #print("필터 back" , filter_list)
     carinfo = service.carinfodetail(carinfono)
-    filter_data = service.finddata(carinfo.carinfono, filter_list)
+
+    res_carinfo = {}
+    for key, value in carinfo.__dict__.items():
+        if isinstance(value, date):
+            res_carinfo[key] = value.strftime('%Y-%m-%d')
+        # sqlalchemy.orm.state.InstanceState 타입 제거 목적
+        elif not((type(value) is int) | (type(value) is str) | (type(value) is float)):
+            continue
+        else:
+            res_carinfo[key] = value
+    
+
+    filter_data = service.finddata(carinfono, filter_list).tolist()
 
     expect_min_price = round(float(carinfo.car_sell_price * 0.95), 0)
     expect_max_price = round(float(carinfo.car_sell_price * 1.05), 0)
 
-    return render_template('carinfo/detail.html', c = carinfo, min=expect_min_price, max=expect_max_price, filter_data=filter_data)
+    send_data = {"carinfo":res_carinfo, "min":expect_min_price, "max":expect_max_price, "filter_data":filter_data}
+    print(send_data)
+    return send_data
+    # return render_template('carinfo/detail.html', c = carinfo, min=expect_min_price, max=expect_max_price, filter_data=filter_data)

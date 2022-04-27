@@ -1,0 +1,38 @@
+.movinglogocontainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+
+      position: absolute;
+      height: 175px;
+      left: 97px;
+      right: 98px;
+      top: 106.5px;
+
+}
+.movinglogo {
+      position: static;
+      justify-content: center;
+      width: 175px;
+      height: 175px;
+      left: 175.5px;
+      top: 0px;
+
+      /* Inside auto layout */
+  
+      
+}
+
+.textlogo {
+      justify-content: center;
+      align-items: center;
+      
+      position: absolute;
+      width: 240px;
+      height: 106px;
+      left: 75px;
+      top: 308px;
+}
+

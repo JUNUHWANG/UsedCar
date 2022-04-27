@@ -23,7 +23,7 @@
         currentText: '오늘 날짜'
     });
 
-    $(function() {
+    $(function () {
         $("#car_buytime").datepicker({
             viewMode: "months",
             minViewMode: "months"
@@ -31,74 +31,77 @@
     });
 
 </script>
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
+
 <body>
     <h3>차량 정보 입력</h3>
     <form action="/carinfo/input1" method="post">
-        차량 번호:<input type="text" name="car_num"><br/>
-        출고가:<input type="number" name="car_buy_price">만원<br/>
-        제조사:<input type="text" name="car_company"><br/>
-        모델명:<input type="text" name="car_name"><br/>
-        연형(ex. 2009 년형 → "09" 입력):<br/>
-        <input type="text" name="car_year">년형<br/>
-        구매일자:<input id="car_buytime" type="text" name="car_buytime"><br/>
-        주행거리(km):<input type="number" name="car_km">km<br/>
+        차량 번호:<input type="text" name="car_num"><br />
+        출고가:<input type="number" name="car_buy_price">만원<br />
+        제조사:<input type="text" name="car_company"><br />
+        모델명:<input type="text" name="car_name"><br />
+        연형(ex. 2009 년형 → "09" 입력):<br />
+        <input type="text" name="car_year">년형<br />
+        구매일자:<input id="car_buytime" type="text" name="car_buytime"><br />
+        주행거리(km):<input type="number" name="car_km">km<br />
         연료종류:<select name="car_fuel">
-                    <option value="">연료 선택</option>
-                    <option value="가솔린">가솔린</option>
-                    <option value="디젤">디젤</option>
-                    <option value="CNG">CNG</option>
-                    <option value="LPG">LPG</option>
-                    <option value="전기">전기</option>
-                    <option value="하이브리드(가솔린)">하이브리드(가솔린)</option>
-                    <option value="하이브리드(디젤)">하이브리드(디젤)</option>
-                    <option value="하이브리드(LPG)">하이브리드(LPG)</option>
-                </select> <br/>
+            <option value="">연료 선택</option>
+            <option value="가솔린">가솔린</option>
+            <option value="디젤">디젤</option>
+            <option value="CNG">CNG</option>
+            <option value="LPG">LPG</option>
+            <option value="전기">전기</option>
+            <option value="하이브리드(가솔린)">하이브리드(가솔린)</option>
+            <option value="하이브리드(디젤)">하이브리드(디젤)</option>
+            <option value="하이브리드(LPG)">하이브리드(LPG)</option>
+        </select> <br />
         변속기어:<select name="car_gear">
-                    <option value="">기어 선택</option>
-                    <option value="오토">오토</option>
-                    <option value="수동">수동</option>
-                    <option value="CVT">CVT</option>
-                    <option value="SAT">SAT</option>
-                </select> <br/>
+            <option value="">기어 선택</option>
+            <option value="오토">오토</option>
+            <option value="수동">수동</option>
+            <option value="CVT">CVT</option>
+            <option value="SAT">SAT</option>
+        </select> <br />
         차량종류:<select name="car_size">
-                    <option value="">차량종류 선택</option>
-                    <option value="RV">RV</option>
-                    <option value="SUV">SUV</option>
-                    <option value="경차">경차</option>
-                    <option value="소형">소형</option>
-                    <option value="중형">중형</option>
-                    <option value="준중형">준중형</option>
-                    <option value="대형">대형</option>
-                    <option value="승합">승합</option>
-                    <option value="스포츠카">스포츠카</option>
-                </select> <br/>
+            <option value="">차량종류 선택</option>
+            <option value="RV">RV</option>
+            <option value="SUV">SUV</option>
+            <option value="경차">경차</option>
+            <option value="소형">소형</option>
+            <option value="중형">중형</option>
+            <option value="준중형">준중형</option>
+            <option value="대형">대형</option>
+            <option value="승합">승합</option>
+            <option value="스포츠카">스포츠카</option>
+        </select> <br />
         판매예상지역:<select name="car_sellarea">
-                    <option value="">판매예상지역 선택</option>
-                    <option value="서울">서울</option>
-                    <option value="경기">경기</option>
-                    <option value="인천">인천</option>
-                    <option value="강원">강원</option>
-                    <option value="대전">대전</option>
-                    <option value="충남">충남</option>
-                    <option value="충북">충북</option>
-                    <option value="광주">광주</option>
-                    <option value="전남">전남</option>
-                    <option value="전북">전북</option>
-                    <option value="대구">대구</option>
-                    <option value="경남">경남</option>
-                    <option value="경북">경북</option>
-                    <option value="울산">울산</option>
-                    <option value="부산">부산</option>
-                    <option value="제주">제주</option>
-                </select> <br/>
-        배기량:<input type="number" name="car_cc">cc<br/>
-        차량색상:<input type="text" name="car_color">색<br/>
+            <option value="">판매예상지역 선택</option>
+            <option value="서울">서울</option>
+            <option value="경기">경기</option>
+            <option value="인천">인천</option>
+            <option value="강원">강원</option>
+            <option value="대전">대전</option>
+            <option value="충남">충남</option>
+            <option value="충북">충북</option>
+            <option value="광주">광주</option>
+            <option value="전남">전남</option>
+            <option value="전북">전북</option>
+            <option value="대구">대구</option>
+            <option value="경남">경남</option>
+            <option value="경북">경북</option>
+            <option value="울산">울산</option>
+            <option value="부산">부산</option>
+            <option value="제주">제주</option>
+        </select> <br />
+        배기량:<input type="number" name="car_cc">cc<br />
+        차량색상:<input type="text" name="car_color">색<br />
         <input type="hidden" name="id" value="{{session.login_id}}">
-        <input type="submit" value="다음단계"><br/>
+        <input type="submit" value="다음단계"><br />
     </form>
 </body>
+
 </html>
