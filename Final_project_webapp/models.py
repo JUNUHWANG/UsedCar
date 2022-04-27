@@ -1,11 +1,13 @@
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from flask import session
+from flask import jsonify, session
 import pandas as pd
+import json
 import os
 
 db = SQLAlchemy()
 migrate = Migrate()
+
 
 
 class Member(db.Model):
@@ -18,6 +20,7 @@ class Member(db.Model):
 class Carinfo(db.Model):
     carinfono = db.Column( db.Integer, primary_key=True, unique=True, autoincrement=True)
     id = db.Column( db.String( 20 ), db.ForeignKey( 'member.id', ondelete='CASCADE' ) )
+    member = db.relationship('Member', backref=db.backref('carinfo_set', cascade="delete"))
     ## 가격은 모델 돌린 후 들어갈 내용
     car_sell_price = db.Column(db.Integer, nullable=False )
     ## 검색 데이터의 경우 모두 판매중으로 들어갈 예정
@@ -69,6 +72,7 @@ class Carinfo(db.Model):
     car_option_ldsw = db.Column(db.Integer, nullable=False)
     car_option_cruise = db.Column(db.Integer, nullable=False)
     car_option_autotrunk = db.Column(db.Integer, nullable=False)
+    car_search_date = db.Column(db.Date, nullable=False)
 
 class MemService:
     def join(self, m: Member):  # 회원가입
@@ -81,11 +85,12 @@ class MemService:
             if pwd == str(mem.pwd):
                 session['login_id'] = id
                 session['flag'] = True
-                return True
+                return id
         return False
 
-    def myInfo(self):  # 로그인 한 id로 검색한 객체 반환
-        id = session['login_id']
+    def myInfo(self, id: str):  # 로그인 한 id로 검색한 객체 반환
+        #id = session['login_id']
+        print("myinfo에서 id" + id)
         return Member.query.get( id )
 
     def editMyInfo(self, pwd: str):  # 새 pwd받아서 현재 로그인 중인 id로 검색하여 수정
@@ -97,8 +102,10 @@ class MemService:
         session.pop( 'login_id' )
         session['flag'] = False
 
-    def out(self):  # 로그인한 id를 db에서 삭제. 로그아웃 처리.
-        mem = self.myInfo()
+    def out(self, id:str):  # 로그인한 id를 db에서 삭제. 로그아웃 처리.
+        print("out에서 id" + id)
+        mem = self.myInfo(id)
+        print(type(mem))
         db.session.delete( mem )  # delete문 실행. 파라미터로 삭제할 객체 지정
         db.session.commit()
         self.logout()
@@ -116,8 +123,12 @@ class CarInfoService:
         carinfo = Carinfo.query.get(carinfono)
         return carinfo
 
-    def getmycarinfo(self):  # 로그인 한 id로 검색한 객체 반환
-        list_carinfo = Carinfo.query.filter_by(id = session['login_id']).all()
+    def getmycarinfo(self, id:str):  # 로그인 한 id로 검색한 객체 반환
+        # 검색일자 리스트에서 carinfo for i 반복문 처리
+        # print("model안 id값" + id)
+        print(id)
+        list_carinfo = Carinfo.query.filter_by(id = id).all()
+        print( list_carinfo)
         return list_carinfo
 
     def delmycarinfo(self, carinfono:int):  # 로그인한 id를 db에서 삭제. 로그아웃 처리.
@@ -128,7 +139,7 @@ class CarInfoService:
     # 동일 차종 연식 시세, // 실 데이터를 어떤 기준으로 보고싶어하는가??
     def finddata(self, carinfono:int, filter_list:list):
         currentpath = os.getcwd()
-        data = pd.read_csv( currentpath + '/pythonProject/used_car_webapp/used_car/Final_project_webapp/csv/merge_search.csv', encoding='utf8' )
+        data = pd.read_csv( './csv/merge_search.csv', encoding='utf8' )
         data.drop(columns=['Unnamed: 0'],inplace=True)
 
         data['연형'] = data['연형'].astype(str).str.zfill(2)
@@ -149,7 +160,7 @@ class CarInfoService:
 
         if expect_max_year == 100:
             expect_max_year = 0
-
+       
         for i in filter_list:
             if i == '가격':
                 data = data[(data['가격'] < expect_max_price ) & (data['가격'] > expect_min_price)]

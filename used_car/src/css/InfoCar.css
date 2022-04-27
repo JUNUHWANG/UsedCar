@@ -1,0 +1,266 @@
+.InfoContainer {
+      margin-top: 500px;
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: 100;
+}
+
+input::-webkit-input-placeholder {
+     font-size: 15px;
+     font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: 100;
+}
+
+select {
+      margin-left: 30px;
+      margin-top: 5px;
+      width: 335px; /* 원하는 너비설정 */
+      padding: 13px; /* 여백으로 높이 설정 */
+      padding-right: 0px;
+      padding-left: 30px;
+      
+      font-family:  'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      font: gray;
+      line-height: 100%;
+
+      border: 2px solid #5061FF;
+      border-radius: 80px; /* iOS 둥근모서리 제거 */ 
+      -webkit-appearance: none; /* 네이티브 외형 감추기 */
+      -moz-appearance: none;
+      appearance: none;
+      text-align:left;
+  }
+
+ /*  background: url('../.asset/') no-repeat 95% 50%; 네이티브 화살표를 커스텀 화살표로 대체  */
+
+ .back {
+       background-color: #5061FF;
+       background-position: center top;
+       width: 390px;
+       height: 844px;
+       color: #5061FF;
+       padding-top: 0;
+       
+ }
+
+ .nextbutton {
+      margin: 0 auto;
+      width: 100px;
+      height: 30px;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-bottom: 15px;
+      margin-right: auto;
+      display: table;
+      color:#ffffff;
+      background-color: #5061FF;
+      border-radius: 80px ;
+      border: 10px;
+}
+.finishbutton {
+      margin: 0 auto;  
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      background-color: #5061FF;
+      color:#ffffff;
+      display: block;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      width: 300px;
+      border: 0px;
+      height: 30px;
+      border-radius: 8px;
+      
+}
+
+.userbox {
+      
+      display: flex;
+      padding-top: 10px;
+      padding-left: 45%;    
+      width: 170px;  
+      display:absolute;
+      top: 5px;
+      position: absolute;
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: normal;
+}
+
+input[type='radio'],input[type='radio']:checked {
+      appearance: none;
+      width: 0.9rem;
+      height: 0.9rem;
+      margin-right: -3px;
+      
+}
+input[type='radio'] {
+      background-color: #ffffff;
+      border: 2px solid;
+    }
+    input[type='radio']:checked {
+      background-color: #5061FF;
+    }
+
+h5 {
+      margin-left: 30px;
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
+      text-align: left;
+}
+.radiointro {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      color: #5061FF;
+}
+
+.radiobox {
+      margin: 0 auto;
+      width: 390px;
+      
+}
+
+.radiolabel {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: normal; 
+      display: inline;
+      width: 100%;
+      margin-left: 46px;
+      margin-right: 60px;
+      
+}
+.pageholder {
+      top:50px;
+      position: absolute;
+      align-items: center;
+      width: 390px;
+      text-align: center;
+}
+
+.priceintro {
+      display: absolute;
+      position: absolute;
+      top: 0px;
+}
+
+.startbutton {
+      display: block;
+      position: absolute;
+      top: 750px;
+      margin: 0 auto;
+      color: #ffffff;
+      background-color:#DB6B1A;
+      font-family: 'Noto Sans CJK KR';
+      font-style: bold;
+      font-weight: bold;
+      font-size: 27px;
+      width: 200px;
+      height: 50px;
+      border: 0px;
+      border-radius: 8px;
+      left: 90px;
+
+}
+.inputintro {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      color: #5061FF;
+      margin-left: 32px;
+      text-align: left;
+}
+
+h6 {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 15px;
+      margin-left:32px;
+      margin-bottom: 2px;
+      margin-top:5px;
+      text-align: left;
+}
+
+.resulttitle {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: bold;
+      margin: 0 auto;
+      width: 100%;
+}
+.resultimage {
+      width: 390px;
+      margin: 0 auto;      
+
+}
+
+.pricebox {
+      width: 390px;
+      margin: 0 auto;
+      align-items: center;
+      display: block;
+}
+
+.pricenumber {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: bold;
+      color: #5061FF;
+      font-size: 35px;
+}
+.pricecontrol {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
+      width: 390px;
+      margin: 0 auto;
+      display: block;
+      margin-bottom: 15px;
+      
+}
+
+.resulttext {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: bold;
+      text-align: left;
+      margin-left: 125px;
+      margin-right: auto;
+      margin-bottom: 15px;
+}
+
+
+.finishbutton2 {
+      margin: 0 auto;  
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      background-color: #5061FF;
+      color:#ffffff;
+      display: block;
+      
+      margin-bottom: 7px;
+      width: 300px;
+      border: 0px;
+      height: 30px;
+      border-radius: 8px;
+      
+}
+
+.buttonbox {
+      margin-top: 36px;
+}

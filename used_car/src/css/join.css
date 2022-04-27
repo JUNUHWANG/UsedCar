@@ -1,0 +1,15 @@
+.container {
+      width:  100%;
+      margin: 0 auto;
+      
+      padding: 0;
+}
+.title {
+      font-family: 'San Francisco';
+      margin-left: 40px;
+
+}
+
+.buttonbox {
+      margin-top:10px;
+}

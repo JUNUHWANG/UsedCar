@@ -1,0 +1,47 @@
+.container {
+      width: 65%;
+      height: 60%;
+      padding-top: 30px;
+      padding-bottom: 0px;
+      margin-left: auto;
+      margin-right: auto;
+}      
+.page {
+      align-items: center;
+}
+
+.finishbutton4 {
+      margin-top: 7px;
+      margin: 0 auto;  
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: normal;
+      font-size: 15px;
+      background-color: #ff5050;
+      color:#ffffff;
+      display: block;
+      margin-bottom: 7px;
+      width: 300px;
+      border: 0px;
+      height: 30px;
+      border-radius: 8px;
+      
+      
+}
+.box {
+      margin: 0 auto;
+      width: 100%;
+}
+
+
+
+.meminfotext {
+      font-family: 'Noto Sans CJK KR';
+      font-style: normal;
+      font-weight: bold;
+      font-size: 17px;
+      width: auto;
+      margin-left: 50px;
+      margin-right: auto;
+      margin-bottom: 15px;
+}
