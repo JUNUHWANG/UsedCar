@@ -122,7 +122,7 @@ const CarinfoDetail = () => {
 
 
 
-         const nameList = filterdata && filterdata.map((data) => <li className="list3"> {data[10]} {data[9]}년형  <Link  className='link' to= {"//www.kbchachacha.com/public/car/detail.kbc?carSeq=" + data[0]}  target="_blank">바로가기</Link><br/> <div className="listinfo"> 주행거리:  {data[3]}km  {data[1]}만원 출시일: {data[2]} </div></li>)
+         const nameList = filterdata && filterdata.map((data) => <li className="list3"> {data[10]} {data[9]}년형 /  {data[1]}만원  <Link  className='link' to= {"//www.kbchachacha.com/public/car/detail.kbc?carSeq=" + data[0]}  target="_blank">바로가기</Link><br/> <div className="listinfo"> 주행거리:  {data[3]}km  출시일: {data[2]} </div></li>)
          /* const infoList = carinfos && carinfos.map((carinfo) => <li>id:{carinfo.id} <br/>차량번호:{carinfo.car_num}<br/></li>)  */
               /* <div> {infoList} </div> */
     return (
